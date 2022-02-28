@@ -1,6 +1,8 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 const fileUpload =  require('express-fileupload');
 const connectionDB = require('../config/db');
+const path = require('path');
 
 class Server {
     constructor() {
@@ -16,10 +18,20 @@ class Server {
     }
 
     async connectionDB() {
+        // Conexion con la base de datos
         await connectionDB();
     }
 
     middlewares() {
+        // Handlebars
+        this.app.set('views', path.join(__dirname, '../views'));
+        this.app.engine('.hbs', exphbs.engine({
+             defaultLayout: 'main', 
+             extname: '.hbs'
+        }));
+        this.app.set('view engine', '.hbs');
+        // Archivos Estaticos
+        this.app.use(express.static(path.join(__dirname, '../public')));
         // Carga de Archivo
         this.app.use(fileUpload({
             useTempFiles : true,
@@ -32,11 +44,9 @@ class Server {
     }
 
     listen() {
-        this.app.listen(3000, () => {
-            console.log('Server running at port 3000');
+        this.app.listen(process.env.PORT || 3000, () => {
+            console.log(`Server running at port ${ process.env.PORT || 3000 }`);
         });
     }
-
 }
-
 module.exports = Server;

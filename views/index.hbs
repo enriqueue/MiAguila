@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-5 text-center">
+                <span class="title">Subir archivo</span>
+                <form ref='uploadForm'
+                      id='uploadForm' 
+                      action='/upload' 
+                      method='post' 
+                      encType="multipart/form-data">
+                      <div class="mb-3">
+                          <input class="form-control" type="file" name="file" />
+                      </div>
+                      <input class="btn btn-success" type='submit' value='Subir'/>
+                </form>	
+            </div>
+            {{#if total}}
+                <div class="card mt-3 text-center">
+                    <div class="card-body">
+                        <h2>Número de coordenadas:</h2><span> {{ total }}</span>
+                        <h2>Número de coordenadas erroneas:</h2><span> {{ errors }}</span>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

@@ -9,10 +9,10 @@ const postalCodeSchema = mongoose.Schema({
         type: String,
         required: [true, 'Lon is required']
     }, 
-    postCode: {
+    postalCode: {
         type: String, 
         required: [true, 'Postal Code is required']
     }
 });
 
-module.exports = mongoose.model('Codes', postalCodeSchema);
+module.exports = mongoose.model('PostalCodes', postalCodeSchema);
