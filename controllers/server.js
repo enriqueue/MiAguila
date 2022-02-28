@@ -16,17 +16,17 @@ const postController = async(req, res) => {
     return;
   }
 
-  // El archivo
+  // Archivo recibido
   file = req.files.file;
   // Ruta donde se almacena el archivo
   uploadPath = path.join(__dirname, '../uploads/' + file.name);
-  // Moviendo el archivo
+  // Almacenando el archivo
   file.mv(uploadPath, function(err) {
     if (err) {
       return res.status(500).send(err);
     }
   });
-
+  
   const coordinates = [];
   let zeros = 0;
 
